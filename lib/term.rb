@@ -31,8 +31,10 @@ class Term
   def Term.search(search_word)
     results = nil
     Term.all.each_with_index do |term, index|
-      if term.words.index { |word| word == search_word } != nil
-        results = index
+      term.words.each do |word|
+        if word.value.include?(search_word)
+          results = index
+        end
       end
     end
     results
